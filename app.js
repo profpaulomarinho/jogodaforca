@@ -4,32 +4,44 @@ var forca = function(dicPalavras, divErros, divAcertos){
     var palavraSorteada = '';
     var lacunas = '';
     var palavras = dicPalavras;
+    var local = 0;
     var inicia = function(){
         this.erros = '';
         this.acertos = '';
+        this.local=0;
+
         // Como colocar xonteudo em um htnl de id
-        exibeHTML(divAcertos,this.acertos.length);
-        exibeHTML(divErros,this.erros);
-        palavraSorteada = this.palavras[
+        exibeHTML(divAcertos,acertos.length);
+        exibeHTML(divErros,erros);
+        palavraSorteada = palavras[
             Math.floor(
-            Math.random() * this.palavras.length
+            Math.random() * palavras.length
             )];
         this.lacunas = '';
         for(var i=0; i< palavraSorteada.length; i++){
             lacunas += ' _ ';
         }
         exibeHTML(divAcertos,lacunas);
-        document.onkeypress = (evt) => {
+        /*document.onkeypress = (evt) => {
 		    evt = evt || window.event;
 		    var charCode = evt.keyCode || evt.which;
 		    var charStr = String.fromCharCode(charCode);
 		    this.verificaLetra(charStr);
-		};
+		};*/
 
         
     };
+    var testePublico =  () => {
+        this.local = 9;
+    }
+    var testePrivado = function(){
+        this.local = 9;
+    }
+    var retornaPublico = () =>{
+        return this.local;
+    }
     var verificaLetra = (letra) => {
-        console.log('letra='+ letra);
+        //console.log('letra='+ letra);
         if(palavraSorteada.indexOf(letra,0) > -1){
             //console.log('Acertou '+ palavraSorteada.indexOf(letra,0) );
             adicionaAcerto(letra);
@@ -59,7 +71,8 @@ var forca = function(dicPalavras, divErros, divAcertos){
     };
 
     var adicionaErro = (letra) => {
-        if(erros.indexOf(letra,0) == -1){
+        
+        if(erros.indexOf(letra) == -1){
             adicionaNovoErro(letra);
         }
         //se letra ja esta em erro
@@ -72,15 +85,24 @@ var forca = function(dicPalavras, divErros, divAcertos){
         //adiciona letra ao atributo  erros
 
     };
+    
+    var verificaStatusJogo = () => {
+
+      //se o tamahho de erro >= 5
+        //alerta o usuario que morreu
+        
+    //se nao ha _ em lacunas
+        // avisa que ganhou
+    };
     var exibeHTML = function(a,b){
-        document.getElementById(a).innerHTML = b;
+       // if (document) document.getElementById(a).innerHTML = b;
     };
     var atualizaHTML = () =>{
         exibeHTML(divErros, erros);
         lacunas = '';
         for(var i=0; i< palavraSorteada.length; i++){
-            console.log('letraSort='+palavraSorteada.charAt(i));
-            console.log('acertos='+acertos);
+            //console.log('letraSort='+palavraSorteada.charAt(i));
+            //console.log('acertos='+acertos);
 
             if(acertos.indexOf(palavraSorteada.charAt(i)) != -1) {
                 lacunas += palavraSorteada.charAt(i) + ' ';
@@ -101,10 +123,13 @@ var forca = function(dicPalavras, divErros, divAcertos){
         adicionaNovoErro: adicionaNovoErro,
         adicionaAcerto: adicionaAcerto,
         adicionaErro: adicionaErro,
-        adicionaNovoAcerto: adicionaNovoAcerto
+        adicionaNovoAcerto: adicionaNovoAcerto,
+        testePublico: testePublico,
+        testePrivado: testePrivado,
+        retornaPublico: retornaPublico
     };
 }
-window.onload = function() {
+/*window.onload = function() {
     var partida = new forca(
         ["mineral", "dinossauro", "quadrilha",
     "vampiro","luar","jangada","abacaxi"],
@@ -113,4 +138,12 @@ window.onload = function() {
     );
     
     partida.inicia();
-}
+    
+    partida.testePrivado();
+    console.log(partida.retornaPublico());
+    partida.testePublico();
+    console.log(partida.retornaPublico());
+    
+
+}*/
+module.exports =  forca;
