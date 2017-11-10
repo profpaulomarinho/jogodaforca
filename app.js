@@ -112,10 +112,15 @@ var forca = function(dicPalavras, divErros, divAcertos){
         }
         exibeHTML(divAcertos,lacunas)
     }
-    
+    var getErros = () =>{
+        return erros;
+    }
+    var getAcertos = () => {
+        return acertos;
+    }
     return{
-        erros : erros,
-        acertos: acertos,
+        getErros : getErros,
+        getAcertos: getAcertos,
         inicia: inicia,
         palavras: palavras,
         palavraSorteada:palavraSorteada,
