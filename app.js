@@ -22,12 +22,12 @@ var forca = function(dicPalavras, divErros, divAcertos){
             lacunas += ' _ ';
         }
         exibeHTML(divAcertos,lacunas);
-        /*document.onkeypress = (evt) => {
+        document.onkeypress = (evt) => {
 		    evt = evt || window.event;
 		    var charCode = evt.keyCode || evt.which;
 		    var charStr = String.fromCharCode(charCode);
 		    this.verificaLetra(charStr);
-		};*/
+		};
 
         
     };
@@ -95,7 +95,7 @@ var forca = function(dicPalavras, divErros, divAcertos){
         // avisa que ganhou
     };
     var exibeHTML = function(a,b){
-       // if (document) document.getElementById(a).innerHTML = b;
+        if (document) document.getElementById(a).innerHTML = b;
     };
     var atualizaHTML = () =>{
         exibeHTML(divErros, erros);
@@ -134,7 +134,7 @@ var forca = function(dicPalavras, divErros, divAcertos){
         retornaPublico: retornaPublico
     };
 }
-/*window.onload = function() {
+window.onload = function() {
     var partida = new forca(
         ["mineral", "dinossauro", "quadrilha",
     "vampiro","luar","jangada","abacaxi"],
@@ -144,11 +144,11 @@ var forca = function(dicPalavras, divErros, divAcertos){
     
     partida.inicia();
     
-    partida.testePrivado();
-    console.log(partida.retornaPublico());
-    partida.testePublico();
-    console.log(partida.retornaPublico());
+   // partida.testePrivado();
+    //console.log(partida.retornaPublico());
+   // partida.testePublico();
+   // console.log(partida.retornaPublico());
     
 
-}*/
-module.exports =  forca;
+}
+//module.exports =  forca;
